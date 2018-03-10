@@ -37,24 +37,36 @@ Population::~Population()
 	for (int i = 0; i < _amount; i++)
 	{
 		delete _members[i];
-		delete _nextGen[i];
-		delete _matingPool[i];
+	}
+	if (!_nextGen.empty())
+	{
+		for (int i = 0; i < _amount; i++)
+		{
+			delete _nextGen[i];
+		}
+	}
+	if (!_matingPool.empty())
+	{
+		for (int i = 0; i < _amount; i++)
+		{
+			delete _matingPool[i];
+		}
 	}
 	
 	_members.clear();
 	_nextGen.clear();
 	_matingPool.clear();
-	cout << "we died" << endl;
+
 }
 
 void Population::select(int x)
 {
-	vector<Member*> competitors;
+	vector<vector<int>> competitors;
 	vector<int> fitnesses;
 
 	for (int i = 0; i < x; i++) {
 		int r = (rand() % _amount);
-		competitors.push_back(_members.at(r));
+		competitors.push_back(_members.at(r)->getGenes());
 		fitnesses.push_back(_members.at(r)->getFitness());
 	}
 	
@@ -69,7 +81,8 @@ void Population::select(int x)
 			}
 		}
 	}
-	_matingPool.push_back(competitors[0]);
+	_matingPool.push_back(new Member(competitors[0]));
+	//competitors.clear();
 	competitors.clear();
 }
 
@@ -239,7 +252,28 @@ int Population::getAvg()
 	return fitness;
 }
 
+void Population::setMembers(vector<Member*> members)
+{
+	for (int i = 0; i < _matingPool.size(); i++)
+	{
+		delete _matingPool[i];
+	}
+	if (!_members.empty())
+	{
+		for (int i = 0; i < _amount; i++)
+		{
+			delete _members[i];
+		}
+	}
+	_members = members;
+	
+	_matingPool.clear();
+	_nextGen.clear();
 
+	for (int i = 0; i < _amount; i++) {
+		_members[i]->setFitness(_distanceMatrix, _flowMatrix);
+	}
+}
 
 void Population::setDistanceAndFlow(vector<vector<int>> distanceMatrix, vector<vector<int>> flowMatrix)
 {

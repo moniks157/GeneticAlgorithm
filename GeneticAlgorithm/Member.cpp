@@ -19,9 +19,16 @@ Member::Member(vector<int> genes)
 	_genes = genes;
 }
 
+Member::Member(const Member & obj)
+{
+	cout << "Copy constructor allocating ptr." << endl;
+	_length = obj._length;
+	_genes = obj._genes;
+	_fitness = obj._fitness;
+}
+
 Member::~Member()
 {
-	cout << "I am dead " << endl;
 }
 
 void Member::print()

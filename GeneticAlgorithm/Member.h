@@ -13,6 +13,7 @@ private:
 public:
 	Member(int length);
 	Member(std::vector<int> genes);
+	Member(const Member &obj);
 	~Member();
 	void print();
 	std::vector<int> getGenes() { return _genes; };

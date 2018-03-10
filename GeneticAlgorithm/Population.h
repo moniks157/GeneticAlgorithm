@@ -7,8 +7,8 @@ class Population
 private:
 	int _hadXX;
 	int _amount;
-	float _px = 0.2;// 0.50;
-	float _pm = 0.05;// 0.05;
+	float _px = 0.2f;// 0.50;
+	float _pm = 0.05f;// 0.05;
 	
 	std::vector<Member*> _members;
 	std::vector<Member*> _matingPool;
@@ -16,6 +16,8 @@ private:
 
 	vector<vector<int>> _distanceMatrix;
 	vector<vector<int>> _flowMatrix;
+
+	//vector<vector<int>> _members;
 
 public:
 	
@@ -35,6 +37,7 @@ public:
 
 	float getPx() { return _px; }
 
+	void setMembers(vector<Member*> members);
 	void setDistanceAndFlow(vector<vector<int>> distanceMatrix, vector<vector<int>> flowMatrix);
 };
 
