@@ -6,7 +6,6 @@
 #include <map>
 #include <random>
 
-
 Population::Population(int amount, int hadXX, vector<vector<int>> distanceMatrix, vector<vector<int>> flowMatrix)
 {
 	_amount = amount;

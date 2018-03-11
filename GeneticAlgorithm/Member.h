@@ -20,5 +20,7 @@ public:
 	void setGenes(std::vector<int> genes) { _genes = genes; }
 	void setFitness(vector<vector<int>> distanceMatrix, vector<vector<int>> flowMatrix);
 	int getFitness() { return _fitness; };
+
+	void greedy(vector<vector<int>> distanceMatrix, vector<vector<int>> flowMatrix);
 };
 
